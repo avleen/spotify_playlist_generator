@@ -86,3 +86,17 @@ python spotify_playlist_generator.py --artists "Queen" --dryrun --client_id YOUR
 - All tracks across all specified artists are sorted together as a single set
 - The tool automatically handles Spotify API rate limits by waiting and retrying when necessary
 - Authorization tokens are securely stored in the state file and refreshed automatically
+
+## Code development
+
+This application was created almost entirely using an Android tablet, GitHub codespaces and Claude.
+I was asked to make a Spotify playlist while away from my laptop/desktop and wanted to see how well these tools could take over for short term and relatively simple use cases like this.
+The entire development process took around 2 hours with around 15 minutes of that time setting up what I was going to do.
+
+Claude was very good at taking requirements and turning them into well structured, well written code.
+There were several times when I asked it to rewrite large portions of the program:
+
+- It started with the `spotipy` Python module, but that didn't work as cleanly as I wanted. All of the existing code was converted correctly first time from `spotipy` to direct REST requests.
+- Claude correctly added code at the start to do the browser-based authentication necessary to authorize my Spotify app to my personal Spotify account. I didn't realize why this had happened and wanted to simplfy what I was working with early on. Claude removed the code on request. Later I realized I did in fact need that code. Claude added it back in correctly and modified other parts of the program as necessary.
+
+Writing the code manually would probably have taken longer than 2 hours in any environment, and with more errors to work through. I would also have needed to read up and understand the Spotify Web API better early on. Instead I was able to spend my time thinking about features, potential bugs, reviewing code. I did need to read the Spotify API docs, but only enough to understand how they expected requests to look - this was how I found the minor issues in `spotipy` for my use case and decided to switch to making the requestsd directly.
